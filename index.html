@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!--        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+          <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+          <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+          <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">-->
+
+
+        <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+        <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+        <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+        <link href="css/map.style.css" rel="stylesheet">
+        <link rel="stylesheet" href="dist/leaflet.draw.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-fileupload.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-override.css" />
+        <link rel="stylesheet" href="css/bootstrap-wysihtml5.css" />
+        <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">-->
+        <title>..:: Welcome to Cargotel ::..</title>
+
+        <!--<script type="text/javascript" src="libs/leaflet/leaflet.polydrag.js"></script>-->
+        <script src="src/Leaflet.draw.js"></script>
+
+        <script src="src/edit/handler/Edit.Poly.js"></script>
+        <script src="src/edit/handler/Edit.SimpleShape.js"></script>
+        <script src="src/edit/handler/Edit.Circle.js"></script>
+        <script src="src/edit/handler/Edit.Rectangle.js"></script>
+
+        <script src="src/draw/handler/Draw.Feature.js"></script>
+        <script src="src/draw/handler/Draw.Polyline.js"></script>
+        <script src="src/draw/handler/Draw.Polygon.js"></script>
+        <script src="src/draw/handler/Draw.SimpleShape.js"></script>
+        <script src="src/draw/handler/Draw.Rectangle.js"></script>
+        <script src="src/draw/handler/Draw.Circle.js"></script>
+        <script src="src/draw/handler/Draw.Marker.js"></script>
+
+        <script src="src/ext/LatLngUtil.js"></script>
+        <script src="src/ext/GeometryUtil.js"></script>
+        <script src="src/ext/LineUtil.Intersect.js"></script>
+        <script src="src/ext/Polyline.Intersect.js"></script>
+        <script src="src/ext/Polygon.Intersect.js"></script>
+
+        <script src="src/Control.Draw.js"></script>
+        <script src="src/Tooltip.js"></script>
+        <script src="src/Toolbar.js"></script>
+
+        <script src="src/draw/DrawToolbar.js"></script>
+        <script src="src/edit/EditToolbar.js"></script>
+        <script src="src/edit/handler/EditToolbar.Edit.js"></script>
+        <script src="src/edit/handler/EditToolbar.Delete.js"></script>
+
+
+
+        <script type="text/javascript" src="app/angular.1.2.16.min.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+
+        <link href="css/style.default.css" rel="stylesheet">
+        <link href="css/jquery.datatables.css" rel="stylesheet">
+        <script src="js/jquery-1.10.2.min.js"></script> 
+        <script src="js/jquery-migrate-1.2.1.min.js"></script> 
+        <script src="js/jquery-ui-1.10.3.min.js"></script> 
+        <script src="js/bootstrap.min.js"></script> 
+        <script src="js/bootstrap-fileupload.min.js"></script> 
+        <!--<script src="js/chosen.jquery.min.js"></script>--> 
+        <script src="js/modernizr.min.js"></script> 
+        <script src="js/jquery.sparkline.min.js"></script> 
+        <script src="js/toggles.min.js"></script> 
+        <script src="js/retina.min.js"></script> 
+        <script src="js/jquery.cookies.js"></script> 
+        <script src="js/flot/flot.min.js"></script> 
+        <script src="js/flot/flot.resize.min.js"></script> 
+        <script src="js/morris.min.js"></script> 
+        <script src="js/raphael-2.1.0.min.js"></script> 
+        <script src="js/jquery.datatables.min.js"></script> 
+        <script src="js/chosen.jquery.min.js"></script> 
+        <script src="js/custom.js"></script> 
+        <script src="js/dashboard.js"></script>
+        <script src="js/autocomplete.js"></script>
+        <!--<script src="js/wellknown.js"></script>-->
+
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            $(document).ready(function() {
+                $('.MyDemoColorPicker2').empty().addColorPicker({
+                    clickCallback: function(c) {
+                        $('#ColorSelectionTarget2').css('border-color', c).css('color', c);
+                    },
+                    colors: ['#000', '#f00', '#0f0', '#00f'],
+                    iterationCallback: function(target, elem, color, iterationNumber) {
+                        if (iterationNumber < 4 /* colors array is undefined here :( */) {
+                            target.append('&nbsp;-&nbsp;');
+                        }
+                        elem.html(color);
+                    }
+                });
+            });
+//            jQuery(function() {
+//                jQuery(".enter_coo").cloneable();
+//            });
+
+        </script>
+
+        <style>
+            /*            #project-label {
+                            display: block;
+                            font-weight: bold;
+                            margin-bottom: 1em;
+                        }
+                        #project-icon {
+                            float: left;
+                            height: 32px;
+                            width: 32px;
+                        }
+                        #project-description {
+                            margin: 0;
+                            padding: 0;
+                        }*/
+        </style>
+    </head>
+
+    <body  ng-app="CargoTel" ng-controller="getTemplates">
+
+        <!-- Preloader -->
+        <div id="preloader">
+            <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+        </div>
+        <section>
+            <div class="leftpanel">
+                <div class="logopanel">
+                    <h1>Cargotel</h1>
+                </div>
+                <!-- logopanel -->
+
+                <div class="leftpanelinner">
+                    <div class="nav nav-pills nav-stacked nav-bracket">
+                        <h5 class="sidebartitle">Navigation</h5>
+                        <div id="leftPanel">
+                            <!-- infosummary -->
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="active" ng-click="Location();"><a data-toggle="tab" href="#contact3"><strong><img src="images/cstm-imgs/marker-26.png" alt="location" class="img-responsive"></strong></a></li>
+                                <li class="" ng-click="Layer();"><a data-toggle="tab" href="#home3"><strong><img src="images/cstm-imgs/layers-26.png" alt="location" class="img-responsive"></strong></a></li>
+                            </ul>
+                            <div class="tab-content tab-content-padding">
+                                <div id="contact3" class="tab-pane active">
+                                    <div class="tab-content tab-content-padding">
+                                        <div id="home4" class="tab-pane active">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Organization<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type" ng-model="organization_val" ng-change="GetOrganization()" ng-options="obj.name as obj.value for obj in organization_options">
+                                                        <option value="">Select Organization</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Location Type<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type" ng-model="location_type" ng-change="GetLocationType()" ng-options="obj.id as obj.value for obj in location_types">
+                                                        <option value="">Select Location Type</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Location<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <autocomplete id="facility_location" ng-model="facility_location" attr-placeholder="Type to search location..." data="loc_suggestion" on-type="TypeLoc" on-select="SearchLoc"></autocomplete>
+                                                    <!--<input type="text" ng-keyup="LocationSuggestionsMB()" ng-model="facility_location" name="facility_location" id="facility_location" placeholder="Location - 24585-24699 Honda Pkwy, Marysville, OH 43040, USA" class="form-control mt10 mb10" autocomplete="off">-->
+                                                    <label for="Levels" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Levels<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" numbers-only="numbers-only" ng-disabled="isDisable" required placeholder="Total Levels - 5" class="form-control" name="" ng-model="total_levels">
+                                                    <!--                                                <select required="" class="form-control" id="levels">
+                                                                                                        <option value="">Numeric Widget</option>
+                                                                                                    </select>-->
+                                                    <label for="Levels" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Layers<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" numbers-only="numbers-only" required placeholder="Total Layers - 7" class="form-control" name="" ng-model="hierarchy_number">
+                                                    <!--                                                <select required="" class="form-control" id="layers">
+                                                                                                        <option value="">Select Widget</option>
+                                                                                                    </select>-->
+                                                    <label for="Layers" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" >Location Label <span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" required placeholder="Label - Honda Parkway" class="form-control" name="name" ng-model="level_label">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label margin-top">Location Description <span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" required placeholder="Description" class="form-control" name="name" ng-model="level_description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label margin-top">Location Mapping Type<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="loc_layer_mT" ng-model="loc_layer_mT" ng-change="SetLayerType()" ng-options="obj.id as obj.value for obj in drawlayertypes">
+                                                        <option value="">Layer Type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="profile4" class="tab-pane">
+                                            <div class="form-group">
+                                                <!--<label class="col-sm-3 control-label">Location Color<span class="asterisk">*</span></label>-->
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading pad-10">
+                                                        <div class="panel-btns">
+                                                            <a href="" class="minimize maximize" onclick="max_minimize(jQuery(this))">+</a>
+                                                        </div><!-- panel-btns -->
+                                                        <h5 class="panel-title" style="font-size: 14px;">Location Color<span id="setLColor_1" style="float: right;width: 24px; height: 24px;display: none;"></span></h5>
+                                                        <!--<h4 class="panel-title">Location Color</h4>-->
+                                                    </div><!-- panel-heading -->
+                                                    <div style="display: none;" class="panel-body">
+                                                        <div class="col-sm-12">
+                                                            <div class="MyDemoColorPicker2">
+                                                                <!--id="active-color"-->
+                                                                <span class="ColorBlotch" style="background-color: #000080;"  ng-click="GetColor('#000080')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #0080FF;"  ng-click="GetColor('#0080FF')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #008080;"  ng-click="GetColor('#008080')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #00FFFF;" ng-click="GetColor('#00FFFF')"></span>
+                                                            </div>
+                                                            <div class="MyDemoColorPicker2" style="padding-top: 22px;">
+                                                                <span class="ColorBlotch" style="background-color: #FF0000;" ng-click="GetColor('#FF0000')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #A52A2A;"  ng-click="GetColor('#A52A2A')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #800080;" ng-click="GetColor('#800080')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #FF00FF;"  ng-click="GetColor('#FF00FF')"></span>
+                                                            </div>
+                                                            <div class="MyDemoColorPicker2" style="padding-top: 22px;">
+                                                                <span class="ColorBlotch" style="background-color: #333333;"  ng-click="GetColor('#333333')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #808080;"  ng-click="GetColor('#808080')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #C0C0C0;"  ng-click="GetColor('#C0C0C0')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #D8BFD8;"  ng-click="GetColor('#D8BFD8')"></span>
+                                                            </div>
+                                                            <div class="MyDemoColorPicker2" style="padding-top: 22px;">
+                                                                <span class="ColorBlotch" style="background-color: #00FF00;"  ng-click="GetColor('#00FF00')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #808000;" ng-click="GetColor('#808000')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #FFA500;"  ng-click="GetColor('#FFA500')"></span>
+                                                                <span class="ColorBlotch" style="background-color: #FFFF00;"  ng-click="GetColor('#FFFF00')"></span>
+                                                            </div>
+                                                            <br>
+                                                            <input type="text" required placeholder="#000000" class="form-control" name="colorcode" ng-model="selected_color">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<label class="col-sm-3 control-label">Location Icon<span class="asterisk">*</span></label>-->
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading pad-10">
+                                                        <div class="panel-btns">
+                                                            <a href="" class="minimize maximize" onclick="max_minimize(jQuery(this))">+</a>
+                                                        </div><!-- panel-btns -->
+                                                        <h6 class="panel-title" style="font-size: 14px;">Location Icon<img id="setLIcon_1" style="width:24;height:24;float: right;display: none;" src="images/favicon.png"/></h6>
+                                                        <!--<h4 class="panel-title">Location Icon</h4>-->
+                                                    </div><!-- panel-heading -->
+                                                    <div style="display: none;" class="panel-body">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-control scrolling">
+                                                                <script src="js/icons.js"></script>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="about4" class="tab-pane">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Location Mapping Type<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type" ng-model="drawingOption" ng-change="GetDrawingOption()" ng-options="obj.id as obj.value for obj in drawing_options">
+                                                        <option value="">Select Option</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+
+                                            <!--                                        <div class="col-sm-6">
+                                                                                        <div data-provides="fileupload" class="fileupload fileupload-new">
+                                                                                            <div class="input-append">
+                                                                                                <div class="uneditable-input">
+                                                                                                    <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                                                                                    <span class="fileupload-preview"></span>
+                                                                                                </div>
+                                                                                                <span class="btn btn-default btn-file">
+                                                                                                    <span class="fileupload-new">Select file</span>
+                                                                                                    <span class="fileupload-exists">Change</span>-->
+                                            <input id="import__file" style="display: none;" class="dropzone dz-clickable" type="file" on-read-file="showContent($fileContent)">
+                                            <!--                                                    </span>
+                                                                                                <a data-dismiss="fileupload" class="btn btn-default fileupload-exists" href="#">Remove</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>-->
+                                            <div id="enter_coord" style="display: none;">
+                                                <label class="col-sm-3 control-label">Location Coordinates<span class="asterisk">*</span></label>
+                                                <div class="table-responsive left-tabs" >
+                                                    <table class="table mb30">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>FLat/Lon</th>
+                                                                <th>Lat</th>
+                                                                <th>Long</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="enter_coo">
+                                                                <td>Point-<label name="lab_1" id="lab_1" ng-model="lab_1">1</label></td>
+                                                                <td><input type="text" required placeholder="000000" class="form-control" name="lat_1" id="lat_1" ng-model="lat_1"></td>
+                                                                <td><input type="text" required placeholder="000000" class="form-control" name="lng_1" id="lng_1" ng-app="lng_1"></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><button class="btn btn-primary btn-xs" ng-click="DrawVertices()">Draw</button></td>
+                                                                <td></td>
+                                                                <td colspan="3" align="right"><a href="#"><span ng-click="CloneHTML();"><i  class="glyphicon glyphicon-plus"></i></span></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div id="enter_region" style="display: none;">
+                                                <select required="" class="form-control" id="type" ng-model="region_type" ng-change="GetRegionType()" ng-options="obj.id as obj.value for obj in region_options">
+                                                    <option value="">Select Location Type</option>
+                                                </select><br>
+                                                <autocomplete id="states_" style="display: none;" ng-model="result" attr-placeholder="Type to search state..." data="db_states" on-type="TypeState" on-select="SelectState"></autocomplete><br>
+                                                <autocomplete id="msas_" style="display: none;" ng-model="result1" attr-placeholder="Type to search MSA..." data="db_msas" on-type="TypeMSA" on-select="SearchMSA"></autocomplete>
+                                                <autocomplete id="zipcodes_" style="display: none;" ng-model="result2" attr-placeholder="Type to search Zipcode..." data="db_zipcodes" on-type="TypeZipCode" on-select="SearchZipCode"></autocomplete>
+                                                <br>
+                                            </div>
+
+                                        </div>
+                                        <div id="contact4" class="tab-pane">
+                                            <label class="col-sm-3 control-label">Location Display<span class="asterisk">*</span></label>
+                                            <div class="table-responsive left-tabs" >
+                                                <table class="table mb30">
+                                                    <tbody>
+                                                        <tr class="region_attr">
+                                                            <td>Field-<label name="aaa_1" id="aaa_1" ng-model="aaa_1">1</label></td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <!--ng-options="obj.id as obj.value for obj in db_attributes"-->
+                                                                    <select id="attr_1" required="" class="form-control" id="type" ng-model="attributes">
+                                                                        <!--<option value="">Select Attribute</option>-->
+                                                                        <option ng-repeat="opt in db_attributes" value="{{opt.id}}">{{opt.value}}</option>
+                                                                    </select>
+                                                                    <!--<label for="Type" id="bbb_1" class="error"></label>-->
+                                                                </div></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td><button class="btn btn-primary btn-xs" ng-click="AddAttributes()">Add</button><span class="asterisk">*</span></td>
+                                                            <td></td>
+                                                            <td colspan="3" align="right"><a href="#"><span ng-click="CloneAttributes();"><i class="glyphicon glyphicon-plus"></i></span></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td ng-model="selectdAttr">{{selectdAttr}}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <button class="btn btn-primary btn-xs" ng-click="info_sumbit()">Save</button>
+                                        </div>
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <li class="active left-tabs"><a data-toggle="tab" href="#home4"><strong class="small-font">Settings</strong></a></li>
+                                        <li class="left-tabs"><a data-toggle="tab" href="#profile4"><strong class="small-font">Styling</strong></a></li>
+                                        <li class="left-tabs"><a data-toggle="tab" href="#about4"><strong class="small-font">Mapping</strong></a></li>
+                                        <li class="left-tabs"><a data-toggle="tab" href="#contact4"><strong class="small-font">Display</strong></a></li>
+                                    </ul>
+                                </div>
+                                <div id="home3" class="tab-pane">
+
+
+                                    <div class="tab-content tab-content-padding">
+                                        <div id="home" class="tab-pane active">
+                                            <!--                                            <div class="form-group">
+                                                                                            <label class="col-sm-3 control-label">Organization<span class="asterisk">*</span></label>
+                                                                                            <div class="col-sm-12">
+                                                                                                <select required="" class="form-control" id="layer_root_org" ng-model="layer_root_org" ng-change="FilterParent()" ng-options="obj.name as obj.value for obj in organization_options">
+                                                                                                    <option value="">Select Organization</option>
+                                                                                                </select>
+                                                                                                <label for="Type" class="error"></label>
+                                                                                            </div>
+                                                                                        </div>-->
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Parent Layer<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="layertype_1" ng-model="layertype" ng-change="SetParent()" ng-options="obj.id as obj.value for obj in parents">
+                                                        <option value="">Select Layer</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="location_layers"><hr style="border-width: 5px;background-color: black;border-top: solid;">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading pad-10">
+                                                        <div class="panel-btns"> <a class="minimize maximize" href="#" onclick="max_minimize(jQuery(this))">+</a> </div>
+                                                        <h4 class="panel-title" style="font-size:14px;"><label id="setngLabel_1"></label></h4>
+                                                    </div>
+                                                    <div class="panel-body" style="display: none;">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Level<span class="asterisk">*</span></label>
+                                                            <div class="col-sm-12">
+                                                                <!--ng-options="obj.id as obj.value for obj in totalfloors"-->
+                                                                <select required="" class="form-control" id="floorno_1" ng-model="floorno" ng-change="SetFloor()">
+                                                                    <option ng-repeat="opt in totalfloors" value="{{opt.id}}">{{opt.value}}</option>
+                                                                    <!--<option value="">Select Level</option>-->
+                                                                </select>
+                                                                <label for="Type" class="error"></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Layer<span class="asterisk">*</span></label>
+                                                            <div class="col-sm-12">
+                                                                <!--ng-model="layerno_1" ng-change="SetLayerNo()" ng-options="obj.id as obj.value for obj in layer_hierarchy"-->
+                                                                <select required="" class="form-control" id="layerno_1" >
+                                                                    <option value="">Select Layer</option>
+                                                                </select>
+                                                                <label for="Type" class="error"></label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Label<span class="asterisk">*</span></label>
+                                                            <div class="col-sm-12">
+                                                                <input type="text"  onblur="SetValue(jQuery(this).attr('id'));" required placeholder="Layer Label" ng-model="drawlayerlab_1" class="form-control" name="name" id="drawlayerlab_1">
+                                                                <label for="Levels" class="error"></label>
+                                                                <select required="" class="form-control" id="floordrawlyertp_1" ng-model="floordrawlyertp" ng-change="SetLayerType()" ng-options="obj.id as obj.value for obj in drawlayertypes">
+                                                                    <option value="">Layer Type</option>
+                                                                </select>
+                                                                <label for="Levels" class="error"></label>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--                                            <div class="form-group">
+                                                                                                        <label class="col-sm-3 control-label" >Layer Label <span class="asterisk">*</span></label>
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <input type="text" required placeholder="Text Widget..." class="form-control" name="name" id="drawlayerlab_1">
+                                                                                                        </div>
+                                                                                                    </div>-->
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label margin-top">Layer Description <span class="asterisk">*</span></label>
+                                                            <div class="col-sm-12">
+                                                                <input type="text" required placeholder="Description" class="form-control" name="name" id="drawlayerdesc_1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label margin-top">Number of <label id='LabelNumber_1'></label> (s)<span class="asterisk">*</span></label>
+                                                            <div class="col-sm-12">
+                                                                <input type="text" required placeholder="Number" class="form-control" name="name" id="drawlayerno_1">
+                                                            </div>
+                                                        </div>
+                                                    </div></div>
+                                            </div>
+                                            <div class="table-responsive left-tabs">
+                                                <table class="table mb30">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <button ng-click="LayerSettings()" ng-disabled="disable_add_layer_button" class="btn btn-primary btn-xs">Save</button>
+                                                                <!--<a href="#"><span id="rrr"><i class="glyphicon glyphicon-minus"></i></span></a>-->
+                                                            </td>
+                                                            <td align="right">
+                                                                <!--<a href="#"><button ng-click="CloneLayer()" id="enternextlayer" ng-disabled="disable_add_layer_button" class="btn btn-primary btn-xs">Enter Next Layer</button></a>-->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div id="profile" class="tab-pane">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Parent Layer<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type" ng-disabled="true" ng-model="styleparent" ng-options="obj.id as obj.value for obj in parents">
+                                                        <option value="">Layer Select</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="location_layer_style"><hr style="border-width: 5px;background-color: black;border-top: solid;">
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading pad-10">
+                                                        <div class="panel-btns"> <a class="minimize maximize" href="#" onclick="max_minimize(jQuery(this))">+</a> </div>
+                                                        <h4 class="panel-title" style="font-size:14px;">For Layer: <label id="styLabel_1"></label></h4>
+                                                    </div>
+                                                    <div class="panel-body" style="display: none;">
+                                                        <!--                                            <div class="form-group">
+                                                                                                        <label class="col-sm-3 control-label">Level<span class="asterisk">*</span></label>
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <select required="" class="form-control" id="stylefloorno_1" ng-model="stylefloorno_1" ng-options="obj.id as obj.value for obj in totalfloors">
+                                                                                                                <option value="">Select Level</option>
+                                                                                                            </select>
+                                                                                                            <label for="Type" class="error"></label>
+                                                                                                        </div>
+                                                                                                    </div>-->
+                                                        <div class="form-group">
+                                                            <!--                                                <label class="col-sm-3 control-label">For Layer: <label id="styLabel_1"></label></label>-->
+                                                            <div class="col-sm-12" style="display: none;">
+                                                                <!--ng-options="obj.id as obj.value for obj in sub_levels"-->
+                                                                <select required="" ng-disabled="true" class="form-control" id="stylelevels_1" ng-model="stylelevels_1" >
+                                                                    <!--<option value="">Layer Select</option>-->
+                                                                    <option ng-repeat="opt in sub_levels" value="{{opt.id}}">{{opt.value}}</option>
+                                                                </select>
+                                                                <label for="Levels" class="error"></label>
+                                                                <!--                                                    <select required="" class="form-control" id="stylefloordrawlyertp_1" ng-model="stylefloordrawlyertp_1" ng-options="obj.id as obj.value for obj in drawlayertypes">
+                                                                                                                        <option value="">Layer Type</option>
+                                                                                                                    </select>
+                                                                                                                    <label for="Levels" class="error"></label>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <!--<label class="col-sm-3 control-label">Location Color<span class="asterisk">*</span></label>-->
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading pad-10">
+                                                                    <div class="panel-btns">
+                                                                        <a href="#" class="minimize maximize" onclick="max_minimize(jQuery(this))">+</a>
+                                                                    </div><!-- panel-btns -->
+                                                                    <h5 class="panel-title" style="font-size: 14px;">Location Color<span id="setColor_1" style="float: right;width: 24px; height: 24px;display: none;"></span></h5>
+                                                                </div><!-- panel-heading -->
+                                                                <div style="display: none;" class="panel-body">
+                                                                    <div class="col-sm-12" id="asdf_1">
+
+                                                                        <div id="MyDemoColorPicker2">
+                                                                            <table><tr>
+                                                                                    <!--id="active-color"-->
+                                                                                    <td><div id="styleclr1_1" value="#000080" class="ColorBlotch" style="background-color: #000080;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr2_1" class="ColorBlotch" value="#0080FF" style="background-color: #0080FF;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr3_1" class="ColorBlotch" value="#008080" style="background-color: #008080;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr4_1" class="ColorBlotch" value="#00FFFF" style="background-color: #00FFFF;" onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                </tr>
+                                                                            </table></div>
+                                                                        <div id="MyDemoColorPicker2" style="padding-top: 5px;">
+                                                                            <table><tr>
+                                                                                    <td><div id="styleclr5_1" class="ColorBlotch" value="#FF0000" style="background-color: #FF0000;" onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr6_1" class="ColorBlotch" value="#A52A2A" style="background-color: #A52A2A;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr7_1" class="ColorBlotch" value="#800080" style="background-color: #800080;" onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr8_1" class="ColorBlotch" value="#FF00FF" style="background-color: #FF00FF;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                </tr></table>
+                                                                        </div>
+                                                                        <div id="MyDemoColorPicker2" style="padding-top: 5px;">
+                                                                            <table><tr>
+                                                                                    <td><div id="styleclr9_1" class="ColorBlotch" value="#333333" style="background-color: #333333;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr10_1" class="ColorBlotch" value="#808080" style="background-color: #808080;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr11_1" class="ColorBlotch" value="#C0C0C0" style="background-color: #C0C0C0;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr12_1" class="ColorBlotch" value="#D8BFD8" style="background-color: #D8BFD8;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                </tr></table>
+                                                                        </div>
+                                                                        <div id="MyDemoColorPicker2" style="padding-top: 5px;">
+                                                                            <table><tr>
+                                                                                    <td><div id="styleclr13_1" class="ColorBlotch" value="#00FF00" style="background-color: #00FF00;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr14_1" class="ColorBlotch" value="#808000" style="background-color: #808000;" onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr15_1" class="ColorBlotch" value="#FFA500" style="background-color: #FFA500;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                    <td><div id="styleclr16_1" class="ColorBlotch" value="#FFFF00" style="background-color: #FFFF00;"  onclick="LayerGetColor(jQuery(this).attr('id'))"></div></td>
+                                                                                </tr>
+                                                                            </table></div>
+                                                                        <!--                                                    <div class="MyDemoColorPicker2" id="stylecolorr_1">
+                                                                                                                                <table><tr><td>
+                                                                                                                                            id="stylec1_1"
+                                                                                                                                            <div id="stylec1_1" class="ColorBlotch" style="background-color: #ff0000;" ></div></td><td>
+                                                                                                                                            id="stylec2_1"
+                                                                                                                                            <div  class="ColorBlotch" style="background-color: #ffff00;"></div></td><td>
+                                                                                                                                            id="stylec3_1"
+                                                                                                                                            <div  class="ColorBlotch" style="background-color: #00ff00;"></div></td><td>
+                                                                                                                                            id="stylec4_1"
+                                                                                                                                            <div  class="ColorBlotch" style="background-color: #0080ff;"></div></td>
+                                                                                                                                    </tr></table>
+                                                                        
+                                                                                                                            </div>-->
+                                                                        <br>
+
+                                                                        <input type="text" id="styleselectedcolor_1" required placeholder="#000000" class="form-control" name="colorcode">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <!--<label class="col-sm-3 control-label">Location Icon<span class="asterisk">*</span></label>-->
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading pad-10">
+                                                                    <div class="panel-btns">
+                                                                        <a href="#" class="minimize maximize" onclick="max_minimize(jQuery(this))">+</a>
+                                                                    </div><!-- panel-btns -->
+                                                                    <h6 class="panel-title" style="font-size: 14px;">Location Icon<img id="setIcon_1" style="width:24;height:24;float: right;display: none;" src="images/favicon.png"/></h6>
+                                                                </div><!-- panel-heading -->
+                                                                <div style="display: none;" class="panel-body">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-control scrolling" id="styleicon_1">
+                                                                            <script src="js/icons_style.js"></script>
+                                                                        </div>
+                                                                        <input type="hidden" id="styleicone64_1" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive left-tabs">
+                                                <table class="table mb30">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <button class="btn btn-primary btn-xs" ng-disabled="disable_add_style_button" ng-click="LayerStyles()">Save</button>
+                                                                <!--<a href="#"><span id="rrr"><i class="glyphicon glyphicon-minus"></i></span></a>-->
+                                                            </td>
+                                                            <!--<td align="right"><a href="#"><span id="trg_clone" ng-click="CloneLayerStyle();"><i class="glyphicon glyphicon-plus"></i></span></a></td>-->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div id="about" class="tab-pane">
+
+
+
+
+                                            <!--                                        <div class="form-group">
+                                                                                        <label class="col-sm-3 control-label margin-top">Search<span class="asterisk">*</span></label>
+                                                                                        <div class="col-sm-12">
+                                                                                            <input type="text" required placeholder="Search here..." class="form-control" name="name">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br>-->
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Parent Layer<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="layermappingparent_1" ng-disabled="true" ng-model="layermappingparent_1" ng-options="obj.id as obj.value for obj in parents" >
+                                                        <option value="">Layer Select</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                    <label class="col-sm-3 control-label">Layers<span class="asterisk">*</span></label>
+                                                    <select required="" class="form-control" id="layermappingsublevel_1" ng-model="layermappingsublevel_1" ng-change="SetSubLevel();" ng-options="obj.id as obj.value for obj in allowed_layers">
+                                                        <option value="">Layer Select</option>
+                                                        <!--<option ng-repeat="opt in sub_levels" value="{{opt.id}}">{{opt.value}}</option>-->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="location_layer_mapping"><hr style="border-width: 5px;background-color: black;border-top: solid;">
+                                                <label id="asdfg_1" class="col-sm-3 control-label margin-top">Layer-<label id="asterisk_1">1</label></label>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label margin-top">Label<span class="asterisk">*</span></label>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" required placeholder="Layer Label" class="form-control" name="name" id="layermappinglabel_1">
+                                                    </div>
+                                                </div>
+                                                <!--                                            <div class="form-group">
+                                                                                                <label class="col-sm-3 control-label">Level<span class="asterisk">*</span></label>
+                                                                                                <div class="col-sm-12">
+                                                                                                    <select required="" class="form-control" id="layermappingfloorno_1" ng-model="layermappingfloorno_1" ng-options="obj.id as obj.value for obj in totalfloors">
+                                                                                                        <option value="">Select Level</option>
+                                                                                                    </select>
+                                                                                                    <label for="Type" class="error"></label>
+                                                                                                </div>
+                                                                                            </div>-->
+                                                <!--<div class="form-group">-->
+                                                <!--                                                <label class="col-sm-3 control-label">Layers<span class="asterisk">*</span></label>-->
+                                                <!--<div class="col-sm-12">-->
+                                                <!--                                                    <select required="" class="form-control" id="layermappingsublevel_1">
+                                                                                                                                                                <option value="">Layer Select</option>
+                                                                                                        <option ng-repeat="opt in sub_levels" value="{{opt.id}}">{{opt.value}}</option>
+                                                                                                    </select>-->
+                                                <!--<label for="Levels" class="error"></label>-->
+                                                <!--                                                    <label class="col-sm-3 control-label">Layer Type<span class="asterisk">*</span></label>
+                                                                                                    <select required="" class="form-control" id="layermappingdrawlyertp_1" ng-model="layermappingdrawlyertp_1" ng-options="obj.id as obj.value for obj in drawlayertypes">
+                                                                                                        <option value="">Layer Type</option>
+                                                                                                    </select>
+                                                                                                    <label for="Levels" class="error"></label>
+                                                                                                </div>
+                                                                                            </div>-->
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Layer Mapping Type<span class="asterisk">*</span></label>
+                                                    <div class="col-sm-12">
+                                                        <!--ng-click="LayerDrawingOption($event)"-->
+                                                        <!--onchange="LayerDrawingOption(jQuery(this).attr('id'))"-->
+                                                        <select required="" class="form-control" id="layermappingdrawingoption_1" ng-click="LayerDrawingOption($event)" ng-model="layermappingdrawingoption_1" ng-options="obj.id as obj.value for obj in drawing_options_layer">
+                                                            <option value="">Select Option</option>
+                                                            <!--<option ng-repeat="opt in drawing_options_region" value="{{opt.id}}">{{opt.value}}</option>-->
+                                                        </select>
+                                                        <!--ng-options="obj.id as obj.value for obj in drawing_options_region"-->
+                                                        <!--                                                    <select required="" class="form-control" id="layermappingdrawingoption_1" onchange="LayerDrawingOption(jQuery(this).attr('id'))" ng-model="layermappingdrawingoption_1" >
+                                                                                                                <option value="">Select Option</option>
+                                                                                                                <option ng-repeat="opt in drawing_options_region" value="{{opt.id}}">{{opt.value}}</option>
+                                                                                                            </select>-->
+                                                        <label for="Type" class="error"></label>
+                                                    </div>
+                                                </div>
+                                                <input id="layerimportfile_1" style="display: none;" class="dropzone dz-clickable" type="file" on-read-file="showContent($fileContent)">
+                                                <div id="layerentercoord_1" style="display: none;">
+                                                    <label class="col-sm-3 control-label">Location Coordinates<span class="asterisk">*</span></label>
+                                                    <div class="table-responsive left-tabs" >
+                                                        <table class="table mb30">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>FLat/Lon</th>
+                                                                    <th>Lat</th>
+                                                                    <th>Long</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="enter_layer_coo">
+                                                                    <td>Point-<label name="lab_1" id="lab_1_1" ng-model="lab_1_1">1</label></td>
+                                                                    <td><input type="text" required placeholder="000000" class="form-control" name="lat_1_1" id="lat_1_1" ng-model="lat_1_1"></td>
+                                                                    <td><input type="text" required placeholder="000000" class="form-control" name="lng_1_1" id="lng_1_1" ng-model="lng_1_1"></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td><button class="btn btn-primary btn-xs" id="drawlmap_1" ng-click="DrawLMappingVertices($event)">Draw</button></td>
+                                                                    <td></td>
+                                                                    <td colspan="3" align="right"><a href="#">
+                                                                            <button ng-click="CloneLMappingHTML()" class="btn btn-primary btn-xs glyphicon glyphicon-plus"></button>
+                                                                            <!--<button ng-click="CloneLMappingHTML();"><i  class="glyphicon glyphicon-plus"></i></button>-->
+                                                                        </a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="autocalculate_1" style="display: none;">
+                                                    <table class="table mb30">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Width</td>
+                                                                <td><input type="text" ng-model="autoc_width" id="autoc_width" name="autoc_width" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>
+                                                                <td>Height</td>
+                                                                <td><input type="text" ng-model="autoc_height" id="autoc_height" name="autoc_height" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Row</td>
+                                                                <td><input type="text" ng-model="autoc_rows" id="autoc_rows" name="autoc_rows" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>
+                                                                <td>Columns</td>
+                                                                <td><input type="text" ng-model="autoc_columns" id="autoc_columns" name="autoc_columns" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><button class="btn btn-primary btn-xs" ng-disabled="disable_add_sublayer_button" ng-click="BayAutoCalculate()">Draw</button></td>
+                                                                <!--                                                                <td><input type="text" ng-model="autoc_rows" id="autoc_rows" name="autoc_rows" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>
+                                                                                                                                <td>Columns</td>
+                                                                                                                                <td><input type="text" ng-model="autoc_columns" id="autoc_columns" name="autoc_columns" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="000000" required=""></td>-->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Labels<span class="asterisk">*</span></label>
+                                                        <div class="col-sm-12">
+                                                            <table class="table mb30">
+                                                                <tbody>
+                                                                    <tr class="bays_labels">
+                                                                        <td>Bay-<label name="bayLabel_1" id="bayLabel_1" ng-model="bayLabel_1">1</label></td>
+                                                                        <td><input type="text" ng-model="autocLabel_1" id="autocLabel_1" name="autocLabel_1" onfocus="HighLight(jQuery(this).attr('name'))" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Bay Label" required=""></td>
+                                                                    </tr>
+                                                                    <tr><td><button class="btn btn-primary btn-xs" ng-click="UpdateLabels()">Update</button></td></tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!--                                                <div class="form-group">
+                                                                                                <a href="#" style="float: right;"><span id="trg_clone" ng-click="CloneBayLabel();"><i class="glyphicon glyphicon-plus"></i></span></a><br>
+                                                                                            </div>-->
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive left-tabs">
+                                                <table class="table mb30">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left">
+                                                                <button class="btn btn-primary btn-xs" ng-disabled="disable_add_sublayer_button" ng-click="LayerMapping()">Save</button>
+                                                                <!--<a href="#"><span id="rrr"><i class="glyphicon glyphicon-minus"></i></span></a>-->
+                                                            </td>
+                                                            <td align="right"><a href="#">
+                                                                    <button ng-click="CloneLayerMapping($event)" id="enternextlayermp" ng-disabled="disable_add_sublayer_button" class="btn btn-primary btn-xs">Enter Next Layer</button>
+                                                                </a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--                                        <div class="table-responsive left-tabs" >
+                                                                                        <table class="table mb30">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>#</th>
+                                                                                                    <th>Lable</th>
+                                                                                                    <th></th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>1</td>
+                                                                                                    <td><input type="text" required placeholder="Text Weidget" class="form-control" name="name"></td>
+                                                                                                    <td><input type="text" required placeholder="Points" class="form-control" name="name"></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td>2</td>
+                                                                                                    <td><input type="text" required placeholder="Text Weidget" class="form-control" name="name"></td>
+                                                                                                    <td><input type="text" required placeholder="Points" class="form-control" name="name"></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td>3</td>
+                                                                                                    <td><input type="text" required placeholder="Text Weidget" class="form-control" name="name"></td>
+                                                                                                    <td><input type="text" required placeholder="Points" class="form-control" name="name"></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td>4</td>
+                                                                                                    <td><input type="text" required placeholder="Text Weidget" class="form-control" name="name"></td>
+                                                                                                    <td><input type="text" required placeholder="Points" class="form-control" name="name"></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td>5</td>
+                                                                                                    <td><input type="text" required placeholder="Text Weidget" class="form-control" name="name"></td>
+                                                                                                    <td><input type="text" required placeholder="Points" class="form-control" name="name"></td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td align="left"><a href="#"><i class="glyphicon glyphicon-minus"></i></a></td>
+                                                                                                    <td></td>
+                                                                                                    <td align="right"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>-->
+                                        </div>
+
+
+
+
+
+                                        <div id="contact" class="tab-pane">
+
+
+
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Parent Layer<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type">
+                                                        <option value="">Layer Select</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Level<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="type">
+                                                        <option value="">Select</option>
+                                                    </select>
+                                                    <label for="Type" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Layers<span class="asterisk">*</span></label>
+                                                <div class="col-sm-12">
+                                                    <select required="" class="form-control" id="levels">
+                                                        <option value="">Layer Select</option>
+                                                    </select>
+                                                    <label for="Levels" class="error"></label>
+                                                    <select required="" class="form-control" id="levels">
+                                                        <option value="">Layer Type</option>
+                                                    </select>
+                                                    <label for="Levels" class="error"></label>
+                                                </div>
+                                            </div>
+                                            <label class="col-sm-3 control-label">Layer Display<span class="asterisk">*</span></label>
+                                            <div class="table-responsive left-tabs" >
+                                                <table class="table mb30">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Field-1</td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <select required="" class="form-control" id="type">
+                                                                        <option value="">Select Widget</option>
+                                                                    </select>
+                                                                    <label for="Type" class="error"></label>
+                                                                </div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Field-2</td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <select required="" class="form-control" id="type">
+                                                                        <option value="">Select Widget</option>
+                                                                    </select>
+                                                                    <label for="Type" class="error"></label>
+                                                                </div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Field-3</td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <select required="" class="form-control" id="type">
+                                                                        <option value="">Select Widget</option>
+                                                                    </select>
+                                                                    <label for="Type" class="error"></label>
+                                                                </div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Field-4</td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <select required="" class="form-control" id="type">
+                                                                        <option value="">Select Widget</option>
+                                                                    </select>
+                                                                    <label for="Type" class="error"></label>
+                                                                </div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Field-5</td>
+                                                            <td><div class="col-sm-12 col-sm-12-height">
+                                                                    <select required="" class="form-control" id="type">
+                                                                        <option value="">Select Widget</option>
+                                                                    </select>
+                                                                    <label for="Type" class="error"></label>
+                                                                </div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" align="right"><a href="#"><i class="glyphicon glyphicon-plus"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="nav nav-tabs">
+                                        <!--ng-click="TriggerStyleClone();"-->
+                                        <li class="active left-tabs"><a data-toggle="tab" href="#home"><strong class="small-font">Settings</strong></a></li>
+                                        <li class="left-tabs" ng-click="TriggerStyleClone();"><a data-toggle="tab" href="#profile"><strong class="small-font">Styling</strong></a></li>
+                                        <li class="left-tabs"><a data-toggle="tab" href="#about"><strong class="small-font">Mapping</strong></a></li>
+                                        <li class="left-tabs"><a data-toggle="tab" href="#contact"><strong class="small-font">Display</strong></a></li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="leftPanelPreview" style="display: none;">
+
+
+                            <!-- infosummary -->
+                            <ul class="nav nav-tabs nav-justified">
+                                <li ng-click="Location();" class="active"><a href="#preview_location" data-toggle="tab"><strong><img class="img-responsive" alt="location" src="images/cstm-imgs/marker-26.png"></strong></a></li>
+                                <li ng-click="Layer();" class=""><a href="#preview_layers" data-toggle="tab"><strong><img class="img-responsive" alt="location" src="images/cstm-imgs/layers-26.png"></strong></a></li>
+                            </ul>
+                            <div class="tab-content tab-content-padding">
+                                <div id="preview_location" class="tab-pane active">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label margin-top">Organizations<span class="asterisk">*</span></label>
+                                        <div class="col-sm-12">
+                                            <select ng-options="obj.name as obj.value for obj in organization_options" ng-change="GetOrganizationDetails()" ng-model="organization_val_pre" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                <option value="" class="">Select Organization</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label margin-top">Locations<span class="asterisk">*</span></label>
+                                        <div class="col-sm-12">
+                                            <select ng-options="obj.id as obj.value for obj in hierarchy" ng-change="GetSingleLocation()" ng-model="preview_locs" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                <option value="" class="">Select Location</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="table-responsive">
+                                            <table class="table mb30">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Location Type</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_type}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Location</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Levels</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_levels}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Layers</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_layers}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Description</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_description}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Color</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_color}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Icon</label></th>
+                                                        <td><img src="php/blogic/{{prev_loc_icon}}" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Mapping Type</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_mapping_type}}</label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><label class="col-sm-3 control-label margin-top">Display</label></th>
+                                                        <td><label class="col-sm-3 control-label margin-top">{{prev_loc_display}}</label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!--                                    <div class="col-sm-12 col-sm-12-height">
+                                                                            <label class="col-sm-3 control-label">Organization<span class="asterisk">*</span></label>
+                                                                            <select ng-options="obj.name as obj.value for obj in organization_options" ng-change="GetOrganizationDetails()" ng-model="organization_val_pre" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                                                <option value="" class="">Select Organization</option>
+                                                                            </select>
+                                                                        </div>-->
+                                </div>
+                                <div class="tab-pane" id="preview_layers">
+                                    <!--                                    <div class="form-group">
+                                                                            <label class="col-sm-3 control-label margin-top">Search</label>
+                                                                            <div class="col-sm-12">
+                                                                                <autocomplete id="prev_layer_serach" ng-model="prev_layer_serach" attr-placeholder="Type to search layer..." data="prev_search_options" on-type="PreviewLayerSearch" on-select="PreviewLayerSearchSelect"></autocomplete>
+                                                                            </div>
+                                                                        </div>-->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label margin-top">Parent Layer</label>
+                                        <div class="col-sm-12">
+                                            <select ng-change="SetLayerParent()" ng-model="prev_layer_" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                <option ng-repeat="opt in pre_layers" value="{{opt.id}}">{{opt.label}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!--                                    <div class="form-group">
+                                                                            <label class="col-sm-3 control-label margin-top">Level</label>
+                                                                            <div class="col-sm-12">
+                                                                                <select ng-change="SetPrevLevel()" ng-model="prev_layer_level" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                                                    <option ng-repeat="opt in prev_levels" value="{{opt.id}}">{{opt.value}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>-->
+
+                                    <!--                                    <div class="form-group">
+                                                                            <label class="col-sm-3 control-label margin-top">Layer</label>
+                                                                            <div class="col-sm-12">
+                                                                                <select ng-change="SetPrevLayer()" ng-model="prev_layer_layer" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                                                    <option ng-repeat="opt in prev_layers" value="{{opt.id}}">Layer-{{opt.value}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>-->
+
+
+                                    <br>
+
+                                    <div class="panel panel-default" ng-repeat="link in level_layers">
+                                        <div class="panel-heading pad-10">
+                                            <div class="panel-btns">
+                                                <a href="" class="minimize maximize" onclick="max_minimize(jQuery(this))">+</a>
+                                            </div><!-- panel-btns -->
+                                            <h5 class="panel-title" style="font-size: 14px;">{{link.label}}</h5>
+                                            <!--<h4 class="panel-title">Location Color</h4>-->
+                                        </div>
+
+
+                                        <div class="panel-body" style="display: none;">
+                                            <table >
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Layer Label</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{link.label}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Layer Type</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{link.layer_geom_type}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Description</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{link.description}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Layer Areas</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{level_layers.length}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Color</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{link.color}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Icon</label></th>
+                                                    <td><img src="php/blogic/{{link.icon}}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Mapping Type</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{link.mapping_type}}</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label class="col-sm-3 control-label margin-top">Display</label></th>
+                                                    <td><label class="col-sm-3 control-label margin-top">{{attr}}</label></td>
+                                                </tr>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <!--                            <ul class="nav nav-pills nav-stacked nav-bracket">
+                                                            <li class="active">
+                                                                <select ng-options="obj.name as obj.value for obj in organization_options" ng-change="GetOrganizationDetails()" ng-model="organization_val_pre" id="type" class="form-control ng-pristine ng-invalid ng-invalid-required" required="">
+                                                                    <option value="" class="">Select Organization</option>
+                                                                </select>
+                                                            </li>                                
+                                                            <li class="nav-parent" ng-repeat="link in hierarchy"><a href="" ng-click="ShowGeom(link.template_id)"><i class="fa fa-edit"></i> <span>{{link.layer_name}}</span></a>
+                                                                <ul class="children">
+                                                                    <li ng-repeat="subItem in link.sub"><a href="#"><input type="checkbox" checked value="{{subItem.id}}" ng-click="GetCheck($event, subItem.id)" />&nbsp;&nbsp;&nbsp;{{subItem.label}}</a></li>
+                            
+                                                                </ul>
+                                                            </li>
+                                                        </ul>-->
+                        </div>
+                    </div>
+                </div>
+                <!-- leftpanelinner --> 
+            </div>
+            <!-- leftpanel -->
+
+            <div class="mainpanel">
+                <div class="headerbar"> <a class="menutoggle"><i class="fa fa-bars"></i></a>
+                    <div class="header-right">
+                        <ul class="headermenu">
+                            <li>
+                                <div class="btn-group">
+                                    <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="modal" data-target='.modal fade bs-example-modal-p'> <i class="glyphicon glyphicon-map-marker"></i> </button>
+                                    <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown"> <i class="glyphicon glyphicon-folder-open"></i> </button>
+                                    <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown"> <i class="glyphicon glyphicon-file"></i> </button>
+                                    <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown" ng-click=""> <i class="glyphicon  glyphicon-floppy-save"></i> </button>
+                                    <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown"> <i class="glyphicon  glyphicon-remove"></i> </button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="btn-group">
+                                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                                        <h5 class="title">You Have 1 New Message</h5>
+                                        <ul class="dropdown-list gen-list">
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user1.png" alt="" /></span> <span class="desc"> <span class="name">Draniem Daamul <span class="badge badge-success">new</span></span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> </a> </li>
+                                            <li> <a href=""> <span class="thumb"><img src="images/photos/user2.png" alt="" /></span> <span class="desc"> <span class="name">Nusja Nawancali</span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> </a> </li>
+                                            <li> <a href=""> <span class="thumb"><img src="images/photos/user3.png" alt="" /></span> <span class="desc"> <span class="name">Weno Carasbong</span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> </a> </li>
+                                            <li> <a href=""> <span class="thumb"><img src="images/photos/user4.png" alt="" /></span> <span class="desc"> <span class="name">Zaham Sindilmaca</span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> </a> </li>
+                                            <li> <a href=""> <span class="thumb"><img src="images/photos/user5.png" alt="" /></span> <span class="desc"> <span class="name">Veno Leongal</span> <span class="msg">Lorem ipsum dolor sit amet...</span> </span> </a> </li>
+                                            <li class="new"><a href="">Read All Messages</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="btn-group">
+                                    <div class="dropdown-menu dropdown-menu-head pull-right">
+                                        <h5 class="title">You Have 5 New Notifications</h5>
+                                        <ul class="dropdown-list gen-list">
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user4.png" alt="" /></span> <span class="desc"> <span class="name">Zaham Sindilmaca <span class="badge badge-success">new</span></span> <span class="msg">is now following you</span> </span> </a> </li>
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user5.png" alt="" /></span> <span class="desc"> <span class="name">Weno Carasbong <span class="badge badge-success">new</span></span> <span class="msg">is now following you</span> </span> </a> </li>
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user3.png" alt="" /></span> <span class="desc"> <span class="name">Veno Leongal <span class="badge badge-success">new</span></span> <span class="msg">likes your recent status</span> </span> </a> </li>
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user3.png" alt="" /></span> <span class="desc"> <span class="name">Nusja Nawancali <span class="badge badge-success">new</span></span> <span class="msg">downloaded your work</span> </span> </a> </li>
+                                            <li class="new"> <a href=""> <span class="thumb"><img src="images/photos/user3.png" alt="" /></span> <span class="desc"> <span class="name">Nusja Nawancali <span class="badge badge-success">new</span></span> <span class="msg">send you 2 messages</span> </span> </a> </li>
+                                            <li class="new"><a href="">See All Notifications</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <!-- header-right --> 
+
+                </div>
+                <!-- headerbar -->
+
+                <div class="contentpanel padd">
+                    <ul class="nav nav-tabs">
+                        <li><a data-toggle="tab" href="#about1" onclick="Preview();"><strong>Preview</strong></a></li>
+                        <li class="active"><a data-toggle="tab" href="#home1" id="define_tab" onclick="Define();"><strong>Define</strong></a></li>
+                    </ul>
+                    <div class="tab-content hfull">
+                        <div id="home1" class="tab-pane active"> 
+                            <div id="leaflet_map"></div>
+                        </div>
+                        <div id="about1" class="tab-pane ">
+                            <div id="leaflet_map2"></div>
+                            <!--<iframe name=myframe src=http://magmasysdev.com/shales_deposits/front/free_map.php?shale=32&map=gphy&domain=www.google.com width=100% height=100% marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></iframe>-->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- contentpanel --> 
+
+            </div>
+            <!-- mainpanel -->
+
+            <div class="rightpanel"> 
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+                    <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+                    <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="rp-alluser">
+                        <h5 class="sidebartitle">Online Users</h5>
+                        <ul class="chatuserlist">
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/userprofile.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Eileen Sideways</strong> <small>Los Angeles, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user1.png" class="media-object"> </a>
+                                    <div class="media-body"> <span class="pull-right badge badge-danger">2</span> <strong>Zaham Sindilmaca</strong> <small>San Francisco, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user2.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Nusja Nawancali</strong> <small>Bangkok, Thailand</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user3.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Renov Leongal</strong> <small>Cebu City, Philippines</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user4.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Weno Carasbong</strong> <small>Tokyo, Japan</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                        </ul>
+                        <div class="mb30"></div>
+                        <h5 class="sidebartitle">Offline Users</h5>
+                        <ul class="chatuserlist">
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user5.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Eileen Sideways</strong> <small>Los Angeles, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user2.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Zaham Sindilmaca</strong> <small>San Francisco, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user3.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Nusja Nawancali</strong> <small>Bangkok, Thailand</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user4.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Renov Leongal</strong> <small>Cebu City, Philippines</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user5.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Weno Carasbong</strong> <small>Tokyo, Japan</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user4.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Renov Leongal</strong> <small>Cebu City, Philippines</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user5.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Weno Carasbong</strong> <small>Tokyo, Japan</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="rp-favorites">
+                        <h5 class="sidebartitle">Favorites</h5>
+                        <ul class="chatuserlist">
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user2.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Eileen Sideways</strong> <small>Los Angeles, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user1.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Zaham Sindilmaca</strong> <small>San Francisco, CA</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user3.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Nusja Nawancali</strong> <small>Bangkok, Thailand</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user4.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Renov Leongal</strong> <small>Cebu City, Philippines</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user5.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Weno Carasbong</strong> <small>Tokyo, Japan</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="rp-history">
+                        <h5 class="sidebartitle">History</h5>
+                        <ul class="chatuserlist">
+                            <li class="online">
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user4.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Eileen Sideways</strong> <small>Hi hello, ctc?... would you mind if I go to your...</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user2.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Zaham Sindilmaca</strong> <small>This is to inform you that your product that we...</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                            <li>
+                                <div class="media"> <a href="#" class="pull-left media-thumb"> <img alt="" src="images/photos/user3.png" class="media-object"> </a>
+                                    <div class="media-body"> <strong>Nusja Nawancali</strong> <small>Are you willing to have a long term relat...</small> </div>
+                                </div>
+                                <!-- media --> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane pane-settings" id="rp-settings">
+                        <h5 class="sidebartitle mb20">Settings</h5>
+                        <div class="form-group">
+                            <label class="col-xs-8 control-label">Show Offline Users</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="toggle toggle-success"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-8 control-label">Enable History</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="toggle toggle-success"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-8 control-label">Show Full Name</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="toggle-chat1 toggle-success"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-8 control-label">Show Location</label>
+                            <div class="col-xs-4 control-label">
+                                <div class="toggle toggle-success"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tab-pane --> 
+
+                </div>
+                <!-- tab-content --> 
+            </div>
+            <!-- rightpanel --> 
+
+        </section>
+        <canvas id="leaflet_icon_canvas" style="width: 24px; height: 24px; display: none;"></canvas>
+        <div id="info_input" class="modal fade bs-example-modal-p1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <!--ng-controller="info_form"-->
+                <div class="modal-content" >
+                    <!--<div  class="panel panel-dark panel-alt" ng-controller="info_form">-->
+                    <div class="panel-heading">
+                        <div class="panel-btns">
+                            <a class="panel-close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                        </div><!-- panel-btns -->
+                        <h3 class="panel-title">Step 1</h3>
+                        <!--<p>Some description goes here...</p>-->
+                    </div>
+                    <div class="panel-body">
+                        <p>Select the {{prv_value}} you want to populate with {{crnt_value}}</p>
+                        <img src='images/steps/step1.JPG'><br>
+                        <a onclick="CloseStep1();" class="btn btn-primary" style="float: right;">OK</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+
+            </div>
+
+        </div>
+        <div id="info_input_step2" class="modal fade bs-example-modal-p2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <!--ng-controller="info_form"-->
+                <div class="modal-content" >
+                    <!--<div  class="panel panel-dark panel-alt" ng-controller="info_form">-->
+                    <div class="panel-heading">
+                        <div class="panel-btns">
+                            <a class="panel-close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                        </div><!-- panel-btns -->
+                        <h3 class="panel-title">Step 2</h3>
+                        <!--<p>Some description goes here...</p>-->
+                    </div>
+                    <div class="panel-body">
+                        <p>Draw horizontal and vertical lines to define the orientation</p>
+                        <img src='images/steps/step2.JPG'><br>
+                        <a onclick="CloseStep2();" class="btn btn-primary" style="float: right;">OK</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div id="info_input_step3" class="modal fade bs-example-modal-p3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <!--ng-controller="info_form"-->
+                <div class="modal-content" >
+                    <!--<div  class="panel panel-dark panel-alt" ng-controller="info_form">-->
+                    <div class="panel-heading">
+                        <div class="panel-btns">
+                            <a class="panel-close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                        </div><!-- panel-btns -->
+                        <h3 class="panel-title">Step 3</h3>
+                        <!--<p>Some description goes here...</p>-->
+                    </div>
+                    <div class="panel-body">
+                        <p>Enter width, height and number of rows and columns</p>
+                        <img src='images/steps/step3.JPG'><br>
+                        <a onclick="CloseStep3();" class="btn btn-primary" style="float: right;">OK</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div id="info_input_step4" class="modal fade bs-example-modal-p4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <!--ng-controller="info_form"-->
+                <div class="modal-content" >
+                    <!--<div  class="panel panel-dark panel-alt" ng-controller="info_form">-->
+                    <div class="panel-heading">
+                        <div class="panel-btns">
+                            <a class="panel-close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                        </div><!-- panel-btns -->
+                        <h3 class="panel-title">Step 3</h3>
+                        <!--<p>Some description goes here...</p>-->
+                    </div>
+                    <div class="panel-body">
+                        <p>Name each Bay</p>
+                        <img src='images/steps/step4.JPG'><br>
+                        <a onclick="CloseStep4();" class="btn btn-primary" style="float: right;">OK</a>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <a id="step1" class="btn btn-primary mr5" data-target=".bs-example-modal-p1" data-toggle="modal" href="#" style="display: none;">Step1</a>
+        <a id="step2" class="btn btn-primary mr5" data-target=".bs-example-modal-p2" data-toggle="modal" href="#" style="display: none;">Step2</a>
+        <a id="step3" class="btn btn-primary mr5" data-target=".bs-example-modal-p3" data-toggle="modal" href="#" style="display: none;">Step3</a>
+        <a id="step4" class="btn btn-primary mr5" data-target=".bs-example-modal-p4" data-toggle="modal" href="#" style="display: none;">Step4</a>
+    </body>
+</html>
